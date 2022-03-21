@@ -9,9 +9,15 @@ const app = express();
 // using bodyParser to parse JSON bodies into JS objects
 app.use(bodyParser.json());
 
-// enabling CORS for all requests
-app.use(cors());
+app.use(
+    cors({
+        credentials: true,
+        origin: true
+    })
+);
+app.options('*', cors());
 
+app.get('/', (req, res) => res.send('Working!!!'));
 
 app.get('/routes', async (req, res) => {
     const test = await getAllRoutes();
@@ -34,6 +40,6 @@ app.delete('/deleteRoute', async (req, res) => {
     res.send(true);
 });
 // starting the server
-app.listen(3001, () => {
+app.listen(process.env.PORT || 3001, () => {
     console.log('listening on port 3001');
 });
