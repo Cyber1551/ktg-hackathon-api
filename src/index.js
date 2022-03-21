@@ -10,10 +10,7 @@ const app = express();
 app.use(bodyParser.json());
 
 app.use(
-    cors({
-        credentials: true,
-        origin: true
-    })
+    cors()
 );
 app.options('*', cors());
 
