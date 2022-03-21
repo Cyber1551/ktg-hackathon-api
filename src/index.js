@@ -16,11 +16,6 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use(
-    cors()
-);
-app.options('*', cors());
-
 
 app.get('/', (req, res) => res.send('Working!!!'));
 
