@@ -10,8 +10,7 @@ const app = express();
 app.use(bodyParser.json());
 
 
-
-app.use(cors({origin: "*"}))
+app.use(cors({origin: "*"}));
 
 app.get('/', (req, res) => res.send('Working!!!'));
 
