@@ -9,9 +9,15 @@ const app = express();
 // using bodyParser to parse JSON bodies into JS objects
 app.use(bodyParser.json());
 
-app.use(cors({
-    origin: 'https://ktg-hackathon-frontend.herokuapp.com'
-}));
+app.use(function (req, res, next) {
+
+    res.setHeader('Access-Control-Allow-Origin', 'https://ktg-hackathon-frontend.herokuapp.com');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+    next();
+});
 
 app.get('/', (req, res) => res.send('Working!!!'));
 
