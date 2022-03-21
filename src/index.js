@@ -36,7 +36,7 @@ app.put('/updateRoute', async (req, res) => {
     res.status(204).end();
 });
 
-app.delete('/deleteRoute', async (req, res) => {
+app.post('/deleteRoute', async (req, res) => {
     const test = await deleteRoute(req.body);
     res.status(204).end();
 });
