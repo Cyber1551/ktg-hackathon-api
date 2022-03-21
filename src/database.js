@@ -19,6 +19,7 @@ client.connect(err => {
 const getAllRoutes = async () => {
     const routes = client.db(dbName).collection('routes');
     const result = await routes.find({}).toArray();
+    console.log(result);
     return result;
 }
 
@@ -30,9 +31,10 @@ const createRoute = async (doc) => {
 
 const updateRoute = async (doc) => {
     const routes = client.db(dbName).collection('routes');
+    if (!doc._id) return;
     const query = {_id: ObjectId(doc._id)};
     console.log(query);
-    console.log(doc)
+    console.log(doc);
     const changes = {$set: {name: doc.name, points: doc.points, color: doc.color}}
     const result = await routes.updateOne(query, changes);
     return result.modifiedCount;
@@ -40,6 +42,8 @@ const updateRoute = async (doc) => {
 
 const deleteRoute = async (doc) => {
     const routes = client.db(dbName).collection('routes');
+    console.log(doc)
+    if (!doc._id) return;
     const query = {_id: ObjectId(doc._id)};
     const result = await routes.deleteOne(query);
     return result.deletedCount;

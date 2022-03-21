@@ -9,15 +9,7 @@ const app = express();
 // using bodyParser to parse JSON bodies into JS objects
 app.use(bodyParser.json());
 
-app.use(function (req, res, next) {
-
-    res.setHeader('Access-Control-Allow-Origin', 'https://ktg-hackathon-frontend.herokuapp.com');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-    res.setHeader('Access-Control-Allow-Credentials', true);
-
-    next();
-});
+app.use(cors({origin: "*"}))
 
 app.get('/', (req, res) => res.send('Working!!!'));
 
@@ -36,11 +28,11 @@ app.put('/updateRoute', async (req, res) => {
     res.status(204).end();
 });
 
-app.post('/deleteRoute', async (req, res) => {
+app.delete('/deleteRoute', async (req, res) => {
     const test = await deleteRoute(req.body);
     res.status(204).end();
 });
 // starting the server
-app.listen(process.env.PORT || 3001, () => {
+app.listen(3001, () => {
     console.log('listening on port 3001');
 });
